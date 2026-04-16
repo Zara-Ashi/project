@@ -1,0 +1,1 @@
+TC_UI_010: Поведение при несуществующем URL — итоговый URL: https://www.saucedemo.com/nonexistent-page

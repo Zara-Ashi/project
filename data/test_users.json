@@ -1,0 +1,126 @@
+{
+  "valid_users": [
+    {
+      "key": "standard",
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "description": "Стандартный пользователь — все функции работают корректно",
+      "expected_behavior": "normal"
+    },
+    {
+      "key": "problem",
+      "username": "problem_user",
+      "password": "secret_sauce",
+      "description": "Проблемный пользователь — баги в UI (неправильные изображения, сортировка)",
+      "expected_behavior": "buggy_ui"
+    },
+    {
+      "key": "performance_glitch",
+      "username": "performance_glitch_user",
+      "password": "secret_sauce",
+      "description": "Медленный пользователь — искусственные задержки на страницах",
+      "expected_behavior": "slow"
+    },
+    {
+      "key": "error",
+      "username": "error_user",
+      "password": "secret_sauce",
+      "description": "Пользователь с ошибками — некоторые действия вызывают ошибки",
+      "expected_behavior": "errors"
+    },
+    {
+      "key": "visual",
+      "username": "visual_user",
+      "password": "secret_sauce",
+      "description": "Визуальный пользователь — визуальные отличия в UI",
+      "expected_behavior": "visual_bugs"
+    }
+  ],
+  "locked_users": [
+    {
+      "key": "locked",
+      "username": "locked_out_user",
+      "password": "secret_sauce",
+      "description": "Заблокированный пользователь — вход запрещён",
+      "expected_error": "Epic sadface: Sorry, this user has been locked out."
+    }
+  ],
+  "invalid_credentials": [
+    {
+      "key": "wrong_password",
+      "username": "standard_user",
+      "password": "wrong_pass",
+      "expected_error": "Epic sadface: Username and password do not match any user in this service"
+    },
+    {
+      "key": "fake_user",
+      "username": "fake_user",
+      "password": "secret_sauce",
+      "expected_error": "Epic sadface: Username and password do not match any user in this service"
+    },
+    {
+      "key": "empty_username",
+      "username": "",
+      "password": "secret_sauce",
+      "expected_error": "Epic sadface: Username is required"
+    },
+    {
+      "key": "empty_password",
+      "username": "standard_user",
+      "password": "",
+      "expected_error": "Epic sadface: Password is required"
+    },
+    {
+      "key": "sql_injection",
+      "username": "' OR '1'='1",
+      "password": "anything",
+      "expected_error": "access_denied",
+      "notes": "Базовая проверка SQL-инъекции"
+    },
+    {
+      "key": "xss",
+      "username": "<script>alert(1)</script>",
+      "password": "test",
+      "expected_error": "access_denied",
+      "notes": "Базовая проверка XSS"
+    }
+  ],
+  "checkout_info": {
+    "default": {
+      "first_name": "Test",
+      "last_name": "User",
+      "postal_code": "12345"
+    },
+    "edge_cases": [
+      {
+        "key": "empty_first_name",
+        "first_name": "",
+        "last_name": "User",
+        "postal_code": "12345",
+        "expected_error": "First Name is required"
+      },
+      {
+        "key": "empty_last_name",
+        "first_name": "Test",
+        "last_name": "",
+        "postal_code": "12345",
+        "expected_error": "Last Name is required"
+      },
+      {
+        "key": "empty_postal",
+        "first_name": "Test",
+        "last_name": "User",
+        "postal_code": "",
+        "expected_error": "Postal Code is required"
+      },
+      {
+        "key": "non_numeric_postal",
+        "first_name": "Test",
+        "last_name": "User",
+        "postal_code": "ABC!@#",
+        "expected_error": null,
+        "notes": "SauceDemo принимает любой формат postal code"
+      }
+    ]
+  }
+}
